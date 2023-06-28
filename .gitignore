@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Library.API/bin/Debug/net7.0
+/Library.API/obj
+/Library.API/.vs/Library.API/v17
+/Library.API/.vs
+/.vs
+/Library.Domain/bin/Debug/net7.0
+/Library.Domain/obj
+/Library.Infrastructure/bin/Debug/net7.0
+/Library.Infrastructure/obj
+/Library.Service/bin/Debug/net7.0
+/Library.Service/obj
+/Library.Shared
