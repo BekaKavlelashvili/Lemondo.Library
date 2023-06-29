@@ -23,4 +23,8 @@
 	  <ProjectReference Include="..\Library.Service\Library.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="App_Data\" />
+	</ItemGroup>
+
 </Project>

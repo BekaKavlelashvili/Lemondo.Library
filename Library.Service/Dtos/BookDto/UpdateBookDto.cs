@@ -1,6 +1,4 @@
-﻿using Library.Infrastructure.Entities;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Dtos.BookDto
 {
-    public class CreateBookDto
+    public class UpdateBookDto
     {
+        public int Id { get; set; }
+
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
@@ -17,7 +17,5 @@ namespace Library.Application.Dtos.BookDto
         public double Rating { get; set; }
 
         public DateTime PublishDate { get; set; }
-
-        public  List<AuthorDto> Authors { get; set; } = new List<AuthorDto>();
     }
 }

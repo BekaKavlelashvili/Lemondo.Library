@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Library.Application.Dtos.AdministratorDto;
+using Library.Application.Dtos.BookDto;
 using Library.Application.Dtos.UserDto;
 using Library.Infrastructure.Entities;
 
@@ -16,6 +17,13 @@ namespace Library.Application.Utilities.AutoMapperProfiles
                 CreateMap<User, UserToReturnDto>().ReverseMap();
                 CreateMap<Administrator, AdminDto>().ReverseMap();
                 CreateMap<Administrator, AdminToReturnDto>().ReverseMap();
+                CreateMap<Book, CreateBookDto>().ReverseMap();
+                CreateMap<Book, BookDto>().ReverseMap();
+                CreateMap<Book, UpdateBookDto>().ReverseMap();
+                CreateMap<BookInPdf, BookInPdfDto>().ReverseMap();
+                CreateMap<BookPhoto, BookPhotoDto>().ReverseMap();
+                CreateMap<Author, AuthorDto>().ReverseMap();
+                CreateMap<Author, UpdateAuthorDto>().ReverseMap();
             }
         }
     }

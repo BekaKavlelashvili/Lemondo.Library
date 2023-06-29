@@ -1,4 +1,5 @@
-﻿using Library.Application.Dtos.UserDto;
+﻿using Library.Application.Dtos.BookDto;
+using Library.Application.Dtos.UserDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Library.Application.Services.IServices
 {
     public interface IUserService
     {
-        //Task<UserDto> GetProfileAsync(CancellationToken cancellationToken = default);
+        Task<BookDto> GetBookAsync(string name, CancellationToken cancellationToken = default);
 
-        //Task<UserDto> UpdateUserAsync(AddOrUpdateUserDto userDto);
+        Task<List<BookDto>> GetBooksAsync(CancellationToken cancellationToken = default);
     }
 }
