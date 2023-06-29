@@ -9,8 +9,8 @@ namespace Library.Application.Services.IServices
 {
     public interface IUserService
     {
-        Task<UserDto> GetProfileAsync(CancellationToken cancellationToken = default);
+        //Task<UserDto> GetProfileAsync(CancellationToken cancellationToken = default);
 
-        Task<UserDto> UpdateUserAsync(AddOrUpdateUserDto userDto);
+        //Task<UserDto> UpdateUserAsync(AddOrUpdateUserDto userDto);
     }
 }

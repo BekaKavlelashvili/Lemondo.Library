@@ -12,10 +12,10 @@ namespace Library.Application.Utilities.AutoMapperProfiles
             public AutoMapperProfile()
             {
                 CreateMap<User, UserDto>().ReverseMap();
-                CreateMap<User, AddOrUpdateUserDto>().ReverseMap();
+                CreateMap<User, AddUserDto>().ReverseMap();
                 CreateMap<User, UserToReturnDto>().ReverseMap();
                 CreateMap<Administrator, AdminDto>().ReverseMap();
-                CreateMap<Administrator, UpdateAdminDto>().ReverseMap();
+                CreateMap<Administrator, AdminToReturnDto>().ReverseMap();
             }
         }
     }

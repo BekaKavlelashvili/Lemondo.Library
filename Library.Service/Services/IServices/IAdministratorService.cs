@@ -10,18 +10,12 @@ namespace Library.Application.Services.IServices
 {
     public interface IAdministratorService
     {
-        Task<AdminDto> GetAdminInfo(CancellationToken cancellationToken = default);
-
-        Task<AdminDto> UpdateAdminAsync(UpdateAdminDto adminDto);
-
         Task<List<UserDto>> GetUsersAsync(CancellationToken cancellationToken = default);
 
-        Task<UserDto> GetUserAsync(Guid entityId, CancellationToken cancellationToken = default);
+        Task<UserDto> GetUserAsync(int userId, CancellationToken cancellationToken = default);
 
         Task<UserDto> AddUserAsync(AddOrUpdateUserDto userDto);
 
-        Task<UserDto> UpdateUserAsync(AddOrUpdateUserDto userDto);
-
-        Task<UserDto> DeleteUserAsync(Guid entityId);
+        Task DeleteUserAsync(int userId);
     }
 }

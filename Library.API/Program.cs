@@ -1,5 +1,10 @@
+using Library.Application;
 using Library.Infrastructure;
+using Library.Infrastructure.DataContext;
+using Library.Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -16,18 +21,18 @@ builder.Services
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JWT:Secret").Value)),
             ValidateIssuer = false,
             ValidateAudience = false
         };
     });
 
 builder.Services.RegisterDALDependencies(builder.Configuration);
+builder.Services.RegisterBLLDependencies(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -37,6 +42,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        c.SwaggerEndpoint($"../swagger/{description.GroupName}/swagger.json", description.GroupName.ToString());
+    }
+});
 
 app.Run();
 

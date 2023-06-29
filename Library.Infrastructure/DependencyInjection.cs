@@ -1,4 +1,6 @@
 ﻿using Library.Infrastructure.DataContext;
+using Library.Infrastructure.Repositories.IRepositories;
+using Library.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,12 +15,15 @@ namespace Library.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static void RegisterDALDependencies(this IServiceCollection services,  IConfiguration configuration)
+        public static void RegisterDALDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<LibraryDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("LemondoConnectionString"));
             });
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
         }
     }
 }

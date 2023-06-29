@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.API", "Library.API.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Infrastructure", "..\Library.Infrastructure\Library.Infrastructure.csproj", "{BC09B5B2-327F-49C6-8530-BB0ED35A642E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Domain", "..\Library.Domain\Library.Domain.csproj", "{3C7782F0-E591-49D1-A4D5-97373ED5BC54}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Application", "..\Library.Service\Library.Application.csproj", "{31AFB8A1-5754-402F-8193-EB0B3FAA5145}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{BC09B5B2-327F-49C6-8530-BB0ED35A642E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC09B5B2-327F-49C6-8530-BB0ED35A642E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC09B5B2-327F-49C6-8530-BB0ED35A642E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C7782F0-E591-49D1-A4D5-97373ED5BC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C7782F0-E591-49D1-A4D5-97373ED5BC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C7782F0-E591-49D1-A4D5-97373ED5BC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C7782F0-E591-49D1-A4D5-97373ED5BC54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{31AFB8A1-5754-402F-8193-EB0B3FAA5145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31AFB8A1-5754-402F-8193-EB0B3FAA5145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31AFB8A1-5754-402F-8193-EB0B3FAA5145}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Dtos.UserDto
 {
-    public class AddOrUpdateUserDto
+    public class AddUserDto
     {
         public string Username { get; set; } = string.Empty;
 

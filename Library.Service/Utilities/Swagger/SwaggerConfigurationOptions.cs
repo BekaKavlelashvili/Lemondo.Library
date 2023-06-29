@@ -15,10 +15,7 @@ namespace Library.Application.Utilities.Swagger
     {
         private readonly IApiVersionDescriptionProvider _provider;
 
-        public SwaggerConfigurationOptions(IApiVersionDescriptionProvider provider)
-        {
-            _provider = provider;
-        }
+        public SwaggerConfigurationOptions(IApiVersionDescriptionProvider provider) => _provider = provider;
 
         public void Configure(SwaggerGenOptions options)
         {

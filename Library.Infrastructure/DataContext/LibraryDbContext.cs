@@ -30,7 +30,6 @@ namespace Library.Infrastructure.DataContext
             builder.Entity<Administrator>().HasData(new Administrator
             {
                 Id = 1,
-                EntityId = Guid.NewGuid(),
                 UserName = "admin",
                 Password = "admin1234",
                 Name = "admin",

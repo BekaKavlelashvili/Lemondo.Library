@@ -10,8 +10,6 @@ namespace Library.Infrastructure.Entities
     {
         public int Id { get; set; }
 
-        public Guid EntityId { get; set; }
-
         public string Username { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
@@ -19,5 +17,7 @@ namespace Library.Infrastructure.Entities
         public string Name { get; set; } = string.Empty;
 
         public string Surname { get; set; } = string.Empty;
+
+        public string Role { get; set; } = "user";
     }
 }

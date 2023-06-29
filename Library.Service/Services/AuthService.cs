@@ -40,7 +40,7 @@ namespace Library.Application.Services
                 throw new UserNotFoundException();
 
             var userToReturn = _mapper.Map<UserToReturnDto>(user);
-            userToReturn.Token = GenerateToken(user.Id, user.Username);
+            userToReturn.Token = GenerateToken(user.Role, user.Username);
 
             return userToReturn;
         }
@@ -53,21 +53,21 @@ namespace Library.Application.Services
                 throw new UserNotFoundException();
 
             var adminToReturn = _mapper.Map<AdminToReturnDto>(admin);
-            adminToReturn.Token = GenerateToken(admin.Id, admin.UserName);
+            adminToReturn.Token = GenerateToken(admin.Role, admin.UserName);
 
             return adminToReturn;
         }
 
 
-        private string GenerateToken(int userId, string username)
+        private string GenerateToken(string role, string username)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Role, role),
                 new Claim(ClaimTypes.Name, username)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT:Secret").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

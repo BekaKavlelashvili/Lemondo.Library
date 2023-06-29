@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Library.Application.Utilities.AutoMapperProfiles;
 using AutoMapper;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using Library.Application.Utilities.Validators;
 
 namespace Library.Application
 {
@@ -22,14 +25,13 @@ namespace Library.Application
     {
         public static void RegisterBLLDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddAutoMapper(typeof(AutoMapperProfiles));
+            services.AddAutoMapper(typeof(AutoMapperProfiles));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAdministratorService, AdministratorService>();
 
-            //services.AddFluentValidationAutoValidation();
-            //services.AddValidatorsFromAssemblyContaining<UserToLoginDTOValidator>();
-            //services.AddValidatorsFromAssemblyContaining<UserToRegisterDTOValidator>();
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<LoginDtoValidator>();
 
             #region Versioning
 
