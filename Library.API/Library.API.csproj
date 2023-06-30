@@ -25,7 +25,6 @@
 
 	<ItemGroup>
 	  <Folder Include="App_Data\BookPhotos\" />
-	  <Folder Include="App_Data\PdfBooks\" />
 	</ItemGroup>
 
 </Project>
