@@ -23,9 +23,9 @@ namespace Library.Application.Services
 
         public async Task<ImageDto> ImportAsync(IFormFile file, string directory)
         {
-            if (!Directory.Exists("App_Data/Images/BookPhotos"))
+            if (!Directory.Exists("App_Data/BookPhotos"))
             {
-                Directory.CreateDirectory("App_Data/Images/BookPhotos");
+                Directory.CreateDirectory("App_Data/BookPhotos");
             }
 
             using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
@@ -38,7 +38,7 @@ namespace Library.Application.Services
             var mimeType = file.ContentType;
             var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
 
-            using (var fileStream = new FileStream($"Images/{directory}/{uniqueFileName}", FileMode.Create))
+            using (var fileStream = new FileStream($"App_Data/{directory}/{uniqueFileName}", FileMode.Create))
             {
                 image.Save(fileStream, encoder);
             }
@@ -48,7 +48,7 @@ namespace Library.Application.Services
                 MimeType = mimeType,
                 OriginalFileName = file.FileName,
                 UniqueFileName = uniqueFileName,
-                Path = $"Images/{directory}/{uniqueFileName}"
+                Path = $"App_Data/{directory}/{uniqueFileName}"
             };
         }
     }

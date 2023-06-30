@@ -1,6 +1,8 @@
 ﻿using Library.Application.Dtos.AdministratorDto;
 using Library.Application.Dtos.BookDto;
+using Library.Application.Dtos.TakenBooks;
 using Library.Application.Dtos.UserDto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +34,7 @@ namespace Library.Application.Services.IServices
         Task DeleteBookAsync(int bookId);
 
         Task<AuthorDto> UpdateAuthorAsync(UpdateAuthorDto dto);
+
+        Task<List<TakenBooksDto>> GetTakenBooksAsync(CancellationToken cancellationToken = default);
     }
 }

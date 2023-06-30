@@ -52,6 +52,7 @@ app.UseSwaggerUI(c =>
     }
 });
 
+
 app.Run();
 
 public partial class Program { }

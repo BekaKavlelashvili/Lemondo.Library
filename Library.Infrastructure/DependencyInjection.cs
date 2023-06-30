@@ -26,6 +26,7 @@ namespace Library.Infrastructure
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<ITakenBookRepository, TakenBooksRepository>();
         }
     }
 }

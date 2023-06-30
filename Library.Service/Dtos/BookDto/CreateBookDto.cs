@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,6 @@ namespace Library.Application.Dtos.BookDto
 
         public DateTime PublishDate { get; set; }
 
-        public  List<AuthorDto> Authors { get; set; } = new List<AuthorDto>();
+        public List<AuthorDto> Authors { get; set; } = new List<AuthorDto>();
     }
 }

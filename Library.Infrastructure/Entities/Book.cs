@@ -16,11 +16,9 @@ namespace Library.Infrastructure.Entities
 
         public double Rating { get; set; }
 
-        public BookPhoto Photo { get; set; } = new BookPhoto();
-
-        public BookInPdf PDF { get; set; } = new BookInPdf();
-
         public DateTime PublishDate { get; set; }
+
+        public BookImage Image { get; set; } = new BookImage();
 
         public bool IsTaken { get; set; } = false;
 

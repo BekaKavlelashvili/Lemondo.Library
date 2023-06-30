@@ -1,11 +1,16 @@
 ﻿using AutoMapper;
+using Library.Application.Dtos;
 using Library.Application.Dtos.BookDto;
+using Library.Application.Dtos.TakenBooks;
 using Library.Application.Dtos.UserDto;
 using Library.Application.Services.IServices;
 using Library.Application.Utilities.CustomExceptions;
 using Library.Infrastructure.Entities;
+using Library.Infrastructure.Migrations;
 using Library.Infrastructure.Repositories.IRepositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +24,20 @@ namespace Library.Application.Services
         private readonly IUserRepository _userRepository;
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
+        private readonly ITakenBookRepository _takenBookRepository;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
         private readonly ILogger<AdministratorService> _logger;
 
-        public AdministratorService(IUserRepository userRepository, IMapper mapper, ILogger<AdministratorService> logger, IBookRepository bookRepository, IAuthorRepository authorRepository)
+        public AdministratorService(IUserRepository userRepository, IMapper mapper, ILogger<AdministratorService> logger, IBookRepository bookRepository, IAuthorRepository authorRepository, ITakenBookRepository takenBookRepository, IImageService imageService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
             _bookRepository = bookRepository;
             _authorRepository = authorRepository;
+            _takenBookRepository = takenBookRepository;
+            _imageService = imageService;
         }
 
         //get all users
@@ -80,10 +89,18 @@ namespace Library.Application.Services
         }
 
 
-        //add books
+        //add book
         public async Task<BookDto> AddBookAsync(CreateBookDto dto)
         {
             var addedBook = await _bookRepository.AddAsync(_mapper.Map<Book>(dto));
+
+            //var importResult = await _imageService.ImportAsync(image, "BookPhotos");
+
+            //addedBook.Image = new BookImage
+            //{
+            //    ImageName = importResult.OriginalFileName,
+            //    ImagePath = importResult.Path
+            //};
 
             return _mapper.Map<BookDto>(addedBook);
         }
@@ -99,11 +116,11 @@ namespace Library.Application.Services
                 throw new BookNotFoundException();
             }
 
-            var bookToUpdate = _mapper.Map<User>(dto);
+            var bookToUpdate = _mapper.Map<Book>(dto);
 
             _logger.LogInformation("Book with these properties: {@bookToUpdate} has been updated", dto);
 
-            return _mapper.Map<BookDto>(await _userRepository.UpdateUserAsync(bookToUpdate));
+            return _mapper.Map<BookDto>(await _bookRepository.UpdateBookAsync(bookToUpdate));
         }
 
         //get book details
@@ -144,6 +161,7 @@ namespace Library.Application.Services
             await _bookRepository.DeleteAsync(bookToDelete);
         }
 
+        //update book's author
         public async Task<AuthorDto> UpdateAuthorAsync(UpdateAuthorDto dto)
         {
             var book = await _bookRepository.GetAsync(x => x.Id == dto.BookId);
@@ -154,7 +172,7 @@ namespace Library.Application.Services
                 throw new BookNotFoundException();
             }
 
-            var author = book.Authors.FirstOrDefault(x=> x.Id == dto.Id);
+            var author = book.Authors.FirstOrDefault(x => x.Id == dto.Id);
 
             author.Surname = dto.Author.Surname;
             author.Name = dto.Author.Name;
@@ -163,6 +181,16 @@ namespace Library.Application.Services
             var authorToUpdate = _mapper.Map<Author>(author);
 
             return _mapper.Map<AuthorDto>(await _authorRepository.UpdateAsync(authorToUpdate));
+        }
+
+        //get all taken books
+        public async Task<List<TakenBooksDto>> GetTakenBooksAsync(CancellationToken cancellationToken = default)
+        {
+            var takenBooks = await _takenBookRepository.GetListAsync(cancellationToken: cancellationToken);
+
+            _logger.LogInformation("List of {0} has been returned", takenBooks.Count);
+
+            return _mapper.Map<List<TakenBooksDto>>(takenBooks);
         }
     }
 }

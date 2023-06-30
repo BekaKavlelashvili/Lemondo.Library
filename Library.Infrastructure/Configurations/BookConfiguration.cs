@@ -15,19 +15,12 @@ namespace Library.Infrastructure.Configurations
                 c.HasKey(x => x.Id);
                 c.HasIndex(x => x.BookId);
             });
-            builder.OwnsOne(x => x.PDF, c =>
+            builder.OwnsOne(x => x.Image, c =>
             {
-                c.ToTable("Pdfs");
+                c.ToTable("Images");
                 c.HasKey(x => x.Id);
                 c.HasIndex(x => x.BookId);
             });
-            builder.OwnsOne(x => x.Photo, c =>
-            {
-                c.ToTable("Photos");
-                c.HasKey(x => x.Id);
-                c.HasIndex(x => x.BookId);
-            });
-
         }
     }
 }

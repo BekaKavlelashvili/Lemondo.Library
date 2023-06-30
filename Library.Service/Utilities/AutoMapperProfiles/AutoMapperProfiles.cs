@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Library.Application.Dtos;
 using Library.Application.Dtos.AdministratorDto;
 using Library.Application.Dtos.BookDto;
+using Library.Application.Dtos.TakenBooks;
 using Library.Application.Dtos.UserDto;
 using Library.Infrastructure.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace Library.Application.Utilities.AutoMapperProfiles
 {
@@ -20,10 +23,9 @@ namespace Library.Application.Utilities.AutoMapperProfiles
                 CreateMap<Book, CreateBookDto>().ReverseMap();
                 CreateMap<Book, BookDto>().ReverseMap();
                 CreateMap<Book, UpdateBookDto>().ReverseMap();
-                CreateMap<BookInPdf, BookInPdfDto>().ReverseMap();
-                CreateMap<BookPhoto, BookPhotoDto>().ReverseMap();
                 CreateMap<Author, AuthorDto>().ReverseMap();
                 CreateMap<Author, UpdateAuthorDto>().ReverseMap();
+                CreateMap<TakenBooks, TakenBooksDto>().ReverseMap();
             }
         }
     }

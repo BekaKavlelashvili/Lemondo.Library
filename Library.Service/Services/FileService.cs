@@ -13,6 +13,11 @@ namespace Library.Application.Services
     {
         public async Task<FileDto> ImportAsync(IFormFile file, string directory)
         {
+            if (!Directory.Exists("App_Data/PdfBooks"))
+            {
+                Directory.CreateDirectory("App_Data/PdfBooks");
+            }
+
             var mimeType = file.ContentType;
             var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
 

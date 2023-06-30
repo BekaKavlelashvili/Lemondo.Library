@@ -1,4 +1,5 @@
 ﻿using Library.Infrastructure.Entities;
+using Microsoft.AspNetCore.Http.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,6 @@ namespace Library.Application.Dtos.BookDto
         public string Description { get; set; } = string.Empty;
 
         public double Rating { get; set; }
-
-        public BookPhotoDto Photo { get; set; } = new BookPhotoDto();
-
-        public BookInPdfDto PDF { get; set; } = new BookInPdfDto();
 
         public DateTime PublishDate { get; set; }
 

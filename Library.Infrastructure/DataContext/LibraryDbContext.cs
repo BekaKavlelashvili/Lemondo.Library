@@ -21,12 +21,14 @@ namespace Library.Infrastructure.DataContext
         public DbSet<User> Users { get; set; }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<TakenBooks> TakenBooks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new BookConfiguration());
+            builder.ApplyConfiguration(new TakenBookConfiguration());
             builder.Entity<Administrator>().HasData(new Administrator
             {
                 Id = 1,

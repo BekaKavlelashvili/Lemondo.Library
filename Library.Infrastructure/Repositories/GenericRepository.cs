@@ -1,4 +1,5 @@
 ﻿using Library.Infrastructure.DataContext;
+using Library.Infrastructure.Entities;
 using Library.Infrastructure.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -42,6 +43,11 @@ namespace Library.Infrastructure.Repositories
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default)
         {
             return await _db.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter, cancellationToken);
+        }
+        
+        public async Task<User> GetAsync(string userName, CancellationToken cancellationToken = default)
+        {
+            return await _db.Set<User>().AsNoTracking().FirstOrDefaultAsync(x=> x.Username == userName, cancellationToken);
         }
 
         public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default)

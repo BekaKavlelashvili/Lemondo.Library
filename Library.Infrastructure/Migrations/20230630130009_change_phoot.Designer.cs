@@ -4,6 +4,7 @@ using Library.Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230630130009_change_phoot")]
+    partial class change_phoot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,6 +96,31 @@ namespace Library.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books", (string)null);
+                });
+
+            modelBuilder.Entity("Library.Infrastructure.Entities.BookImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId")
+                        .IsUnique();
+
+                    b.ToTable("BookImage");
                 });
 
             modelBuilder.Entity("Library.Infrastructure.Entities.TakenBooks", b =>
@@ -204,36 +231,20 @@ namespace Library.Infrastructure.Migrations
                                 .HasForeignKey("BookId");
                         });
 
-                    b.OwnsOne("Library.Infrastructure.Entities.BookImage", "Image", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
-
-                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"), 1L, 1);
-
-                            b1.Property<int>("BookId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("ImageName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ImagePath")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("BookId")
-                                .IsUnique();
-
-                            b1.ToTable("Images", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("BookId");
-                        });
-
                     b.Navigation("Authors");
+                });
 
+            modelBuilder.Entity("Library.Infrastructure.Entities.BookImage", b =>
+                {
+                    b.HasOne("Library.Infrastructure.Entities.Book", null)
+                        .WithOne("Image")
+                        .HasForeignKey("Library.Infrastructure.Entities.BookImage", "BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Library.Infrastructure.Entities.Book", b =>
+                {
                     b.Navigation("Image")
                         .IsRequired();
                 });

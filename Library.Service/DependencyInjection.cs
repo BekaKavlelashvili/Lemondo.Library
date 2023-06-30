@@ -20,6 +20,7 @@ using FluentValidation;
 using Library.Application.Utilities.Validators;
 using Library.Infrastructure.Repositories.IRepositories;
 using Library.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Library.Application
 {
@@ -33,6 +34,8 @@ namespace Library.Application
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IImageService, ImageService>();
+
+            services.AddHttpContextAccessor();
 
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<LoginDtoValidator>();
