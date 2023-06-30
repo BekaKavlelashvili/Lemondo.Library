@@ -50,6 +50,7 @@ namespace Library.API.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [Consumes("multipart/form-data")]
         [HttpPost("add-file")]
         public async Task<IActionResult> AddFile([FromForm] AddPhotoDto dto)
